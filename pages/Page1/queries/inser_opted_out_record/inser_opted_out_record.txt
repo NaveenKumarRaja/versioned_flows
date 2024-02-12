@@ -1,0 +1,6 @@
+INSERT INTO theoceanleads_sms.sms_optout (phone_number) 
+SELECT sender_number 
+FROM theoceanleads_sms.message_history 
+WHERE lead_id = '{{Contacts.selectedRow.lead_id}}' 
+AND message_type = 'Incoming'
+LIMIT 1;

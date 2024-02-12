@@ -1,0 +1,23 @@
+SELECT 
+    p.parcel_number,
+		p.strap,
+    CONCAT(p.primary_residence, ', ', p.primary_residence_city, ', ', p.primary_residence_state, ' ', p.primary_residence_zip) AS address,
+		p.total_gross_area,
+    p.total_heated_area,
+    p.year_built, 
+    p.last_sale_date, 
+    p.last_Sale_price, 
+    p.lead_type, 
+    b.bath, 
+    l.lead_status,
+		l.zillow_url,
+		l.redfin_url,
+		l.notes
+FROM 
+    pinellas_county.property_details AS p
+JOIN 
+    pinellas_county.building_details AS b ON p.parcel_number = b.parcel_number
+JOIN 
+    theoceanleads_sms.lead AS l ON p.parcel_number = l.lead_id
+WHERE 
+    p.parcel_number = '{{Contacts.selectedRow.lead_id}}';

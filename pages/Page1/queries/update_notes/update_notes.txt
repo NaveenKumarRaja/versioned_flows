@@ -1,0 +1,3 @@
+update theoceanleads_sms.lead
+SET notes = '{{Input_notes.text}}'
+WHERE lead_id = '{{Contacts.selectedRow.lead_id}}';

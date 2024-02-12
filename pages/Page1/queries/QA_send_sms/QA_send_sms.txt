@@ -1,0 +1,8 @@
+[{
+    "sender_number": "{{FetchAdditionalFields.data[0].sender_number}}",
+    "to_number": "{{FetchAdditionalFields.data[0].to_number}}",
+    "message_text": "{{input_message.text}}",
+    "lead_id":"{{Contacts.selectedRow.lead_id}}",
+    "question_id":"{{FetchAdditionalFields.data[0].question_id}}",
+    "campaign_id":"{{FetchAdditionalFields.data[0].campaign_id}}"
+}]

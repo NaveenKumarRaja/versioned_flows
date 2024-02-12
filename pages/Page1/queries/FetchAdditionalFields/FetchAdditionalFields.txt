@@ -1,0 +1,3 @@
+SELECT sender_number, to_number, question_id, campaign_id
+FROM theoceanleads_sms.message_history
+WHERE lead_id = '{{Contacts.selectedRow.lead_id}}' and message_type = 'Outgoing'

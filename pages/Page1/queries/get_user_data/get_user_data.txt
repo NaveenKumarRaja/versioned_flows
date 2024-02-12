@@ -1,0 +1,29 @@
+SELECT 
+    mh.lead_id,
+    MAX(mh.created_date) AS recent_timestamp, 
+    CONCAT(pd.owner1_firstname, ' ', pd.owner1_lastname) AS owner_name,
+    COUNT(*) - SUM(CASE WHEN mh.is_read THEN 1 ELSE 0 END) AS unread_count,
+    l.lead_status
+FROM 
+    theoceanleads_sms.message_history mh
+JOIN 
+    pinellas_county.property_details pd ON mh.lead_id = pd.parcel_number
+JOIN
+    theoceanleads_sms.lead l ON mh.lead_id = l.lead_id
+WHERE 
+    mh.campaign_id = (
+        SELECT campaign_id 
+        FROM theoceanleads_sms.campaign 
+        WHERE campaign_name = '{{Campaign_Dropdown.selectedOptionValue}}'
+    )
+    AND l.lead_status NOT IN ('Unqualified', 'Optout', 'Wrong Number')
+GROUP BY 
+    mh.lead_id, 
+    pd.owner1_firstname, 
+    pd.owner1_lastname,
+    l.lead_status
+HAVING 
+    COUNT(CASE WHEN mh.message_type = 'Incoming' THEN 1 END) > 0 AND
+    COUNT(CASE WHEN mh.message_type = 'Incoming' AND mh.is_sms_optout = false THEN 1 END) = COUNT(CASE WHEN mh.message_type = 'Incoming' THEN 1 END)
+ORDER BY 
+    recent_timestamp DESC;

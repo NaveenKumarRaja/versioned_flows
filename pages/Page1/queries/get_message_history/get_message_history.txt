@@ -1,0 +1,4 @@
+SELECT id,message_text, message_type, created_date, sender_number,to_number,campaign_id,question_id,message_id,message_status
+FROM theoceanleads_sms.message_history 
+WHERE lead_id = '{{Contacts.selectedRow.lead_id}}' 
+ORDER BY created_date DESC;

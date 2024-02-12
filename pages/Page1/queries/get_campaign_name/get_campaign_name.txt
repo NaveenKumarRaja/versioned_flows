@@ -1,0 +1,1 @@
+SELECT campaign_name,campaign_id FROM theoceanleads_sms.campaign;

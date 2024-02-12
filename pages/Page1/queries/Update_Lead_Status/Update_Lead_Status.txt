@@ -1,0 +1,3 @@
+update theoceanleads_sms.lead
+set lead_status = '{{LeadStatus_Dropdown.selectedOptionValue}}'
+WHERE lead_id = '{{Contacts.selectedRow.lead_id}}'

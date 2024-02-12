@@ -1,0 +1,3 @@
+UPDATE theoceanleads_sms.message_history 
+SET is_read = TRUE
+WHERE lead_id = '{{Contacts.selectedRow.lead_id}}';

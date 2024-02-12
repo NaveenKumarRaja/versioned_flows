@@ -1,0 +1,9 @@
+SELECT COUNT(*) 
+FROM theoceanleads_sms.sms_optout
+WHERE phone_number = (
+    SELECT to_number 
+    FROM theoceanleads_sms.message_history 
+    WHERE lead_id = '{{Contacts.selectedRow.lead_id}}' 
+    AND message_type = 'Outgoing'
+	  LIMIT 1
+);
